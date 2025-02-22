@@ -24,6 +24,11 @@ Route::group(['prefix'=>'account'],function(){
         Route::get('profile/logout',[AccountController::class,'profile_logout'])->name('profile.logout');
 
         Route::get('book/index',[BookController::class,'index'])->name('book.index');
+        Route::get('book/create',[BookController::class,'create'])->name('book.create');
+        Route::post('book/store',[BookController::class,'store'])->name('book.store');
+        Route::post('book/trash',[BookController::class,'trash'])->name('book.trash');
+        Route::get('book/edit/{id}',[BookController::class,'edit'])->name('book.edit');
+        Route::post('book/update/{id}',[BookController::class,'update'])->name('book.update');
 
     });
 });
