@@ -13,7 +13,7 @@ class BookController extends Controller
         if(!empty($request->keyword)){
             $books->where('title','like','%'.$request->keyword.'%');
         }
-        $books=$books->paginate(2);
+        $books=$books->paginate(8);
         return view('backend.book.index',['books'=>$books]);
     }
 
