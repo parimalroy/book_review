@@ -11,6 +11,7 @@ use App\Http\Controllers\AccountController;
 
 Route::get('/',[HomeController::class,'index'])->name('book.home');
 Route::get('/details/{id}',[HomeController::class,'details'])->name('book.details');
+Route::post('/review-store',[HomeController::class,'review_store'])->name('review.store');
 
 
 

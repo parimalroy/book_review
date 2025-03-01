@@ -1,6 +1,6 @@
 @extends('frontend.layout.app');
-
 @section('content')
+    @include('../../message')
     <div class="col-md-12">
         <div class="d-flex justify-content-between">
             <h2 class="mb-3">Books</h2>
