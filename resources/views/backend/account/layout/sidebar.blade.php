@@ -20,18 +20,21 @@
         </div>
         <div class="card-body sidebar">
             <ul class="nav flex-column">
+                @if (Auth::user()->role == 'admin')
+                    <li class="nav-item">
+                        <a href="{{ route('book.index') }}">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('review.index') }}">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('profile.index') }}">Profile</a>
+                    </li>
+                @endif
                 <li class="nav-item">
-                    <a href="{{ route('book.index') }}">Books</a>
+                    <a href="{{ route('userReview.index') }}">My Reviews</a>
                 </li>
-                <li class="nav-item">
-                    <a href="reviews.html">Reviews</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('profile.index') }}">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a href="my-reviews.html">My Reviews</a>
-                </li>
+
                 <li class="nav-item">
                     <a href="change-password.html">Change Password</a>
                 </li>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AccountController;
 
 // Route::get('/', function () {
@@ -34,6 +35,16 @@ Route::group(['prefix'=>'account'],function(){
         Route::post('book/trash',[BookController::class,'trash'])->name('book.trash');
         Route::get('book/edit/{id}',[BookController::class,'edit'])->name('book.edit');
         Route::post('book/update/{id}',[BookController::class,'update'])->name('book.update');
+
+        Route::get('book/review',[ReviewController::class,'index'])->name('review.index');
+        Route::get('book/review/edit/{id}',[ReviewController::class,'edit'])->name('review.edit');
+        Route::post('book/review/update/{id}',[ReviewController::class,'update'])->name('review.update');
+        Route::post('book/review/delete',[ReviewController::class,'delete'])->name('review.delete');
+
+        Route::get('book/user-review',[ReviewController::class,'userReviewIndex'])->name('userReview.index');
+
+        Route::get('book/user-review/edit/{id}',[ReviewController::class,'userReviewEdit'])->name('userReview.edit');
+        Route::post('book/user-review/update/{id}',[ReviewController::class,'userReviewUpdate'])->name('userReview.update');
 
     });
 });
