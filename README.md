@@ -21,6 +21,77 @@ A simple yet feature-rich web application built using PHP with Laravel for the b
 - Manage user activity and reviews via the admin dashboard
 - User dashboard to view their own reviews
 
+
+
+## Requirements
+
+#### Before installing the app, make sure you have the following installed on your machine:
+- PHP >= 8.1
+- Composer
+- Laravel 11
+- MySQL
+- Node.js and npm
+
+
+## Installation
+
+Step 1: Clone the repository
+
+```bash
+  git clone https://github.com/parimalroy/book_review.git
+  
+  cd book_review
+```
+    
+Step 2: Install Composer dependencies
+
+##### Install the necessary PHP dependencies using Composer:
+```bash
+ composer install
+```
+
+Step 3: Set up your environment file
+
+##### Copy the .env.example file to create your .env configuration file:
+```bash
+ cp .env.example .env
+```
+
+Step 4: Configure your database
+
+###### Open the .env file and set up your database credentials. Here's an example for MySQL:
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=book_review_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+Step 5: Generate the application key
+##### Run the following command to generate your application's encryption key:
+```bash
+ php artisan key:generate
+```
+
+Step 6: Run database migrations
+
+```bash
+ php artisan migrate
+```
+
+Step 7: Install front-end dependencies
+
+```bash
+npm install
+```
+
+Step 8: Install public storage link
+
+```bash
+php artisan storage:link
+```
+
 ## Front End:
 
 - Users can search for books by title through a search bar available on the homepage.
@@ -61,5 +132,10 @@ Users can register, log in, and access their own personalized dashboard, where t
 
 #### Authentication
 -  Laravel Auth Middleware for both users and admin
+
+# Important Notes:
+
+- Default Role: By default, users will be assigned a "User" role unless manually changed to "Admin".
+- Project status : running.
 
 
