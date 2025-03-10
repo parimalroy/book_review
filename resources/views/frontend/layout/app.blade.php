@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
-<body class="bg-light">
-    <div class="container-fluid shadow-lg header">
+<body>
+    <div class="container-fluid shadow-lg  header">
         <div class="container">
             <div class="d-flex justify-content-between">
                 <h1 class="text-center"><a href="index.html" class="h3 text-white text-decoration-none">Book Review
@@ -37,7 +37,7 @@
             <div class="row justify-content-center">
                 {{-- <div class="row my-5">
 
-            </div> --}}
+                </div> --}}
                 @yield('content')
             </div>
         </div>

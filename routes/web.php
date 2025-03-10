@@ -16,7 +16,7 @@ Route::post('/review-store',[HomeController::class,'review_store'])->name('revie
 
 
 
-Route::group(['prefix'=>'account'],function(){
+Route::group(['prefix'=>'account'],function(){ 
 
     Route::group(['middleware'=>'guest'],function(){      
         Route::get('register/index', [AccountController::class, 'register_index'])->name('register.index');
@@ -29,17 +29,22 @@ Route::group(['prefix'=>'account'],function(){
         Route::post('profile/updates',[AccountController::class,'profile_update'])->name('profile.updates');
         Route::get('profile/logout',[AccountController::class,'profile_logout'])->name('profile.logout');
 
-        Route::get('book/index',[BookController::class,'index'])->name('book.index');
-        Route::get('book/create',[BookController::class,'create'])->name('book.create');
-        Route::post('book/store',[BookController::class,'store'])->name('book.store');
-        Route::post('book/trash',[BookController::class,'trash'])->name('book.trash');
-        Route::get('book/edit/{id}',[BookController::class,'edit'])->name('book.edit');
-        Route::post('book/update/{id}',[BookController::class,'update'])->name('book.update');
+        Route::group(['middleware'=>'isAdmin'],function(){
+            Route::get('book/index',[BookController::class,'index'])->name('book.index');
+            Route::get('book/create',[BookController::class,'create'])->name('book.create');
+            Route::post('book/store',[BookController::class,'store'])->name('book.store');
+            Route::post('book/trash',[BookController::class,'trash'])->name('book.trash');
+            Route::get('book/edit/{id}',[BookController::class,'edit'])->name('book.edit');
+            Route::post('book/update/{id}',[BookController::class,'update'])->name('book.update');
 
-        Route::get('book/review',[ReviewController::class,'index'])->name('review.index');
-        Route::get('book/review/edit/{id}',[ReviewController::class,'edit'])->name('review.edit');
-        Route::post('book/review/update/{id}',[ReviewController::class,'update'])->name('review.update');
-        Route::post('book/review/delete',[ReviewController::class,'delete'])->name('review.delete');
+            Route::get('book/review',[ReviewController::class,'index'])->name('review.index');
+            Route::get('book/review/edit/{id}',[ReviewController::class,'edit'])->name('review.edit');
+            Route::post('book/review/update/{id}',[ReviewController::class,'update'])->name('review.update');
+            Route::post('book/review/delete',[ReviewController::class,'delete'])->name('review.delete');
+        });
+        
+
+
 
         Route::get('book/user-review',[ReviewController::class,'userReviewIndex'])->name('userReview.index');
 

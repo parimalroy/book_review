@@ -1,4 +1,4 @@
-@extends('frontend.layout.app');
+@extends('frontend.layout.app')
 @section('content')
     @include('../../message')
     <div class="col-md-12">

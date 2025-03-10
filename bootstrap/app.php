@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Application;
+use App\Http\Middleware\IsAdminMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -15,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
             guests: 'account/login',
             users: 'account/profile'
         );
+        $middleware->alias([
+            'isAdmin'=>IsAdminMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
