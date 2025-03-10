@@ -16,6 +16,9 @@ body{
     font-family: var(--body-font-family);
 }
 
+a{
+    text-decoration: none;
+}
 .header{
     background-color: var(--btn-bg-primary);
 }

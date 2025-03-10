@@ -32,11 +32,20 @@
                             <a href="{{ route('book.details', $book->id) }}"><img
                                     src="{{ asset('storage/' . $book->photo) }}" alt="" class="card-img-top"></a>
                             <div class="card-body">
+                                @php
+                                    if ($book->reviews_count > 0) {
+                                        $rating = $book->reviews_sum_rating / $book->reviews_count;
+                                    } else {
+                                        $rating = 0;
+                                    }
+
+                                    $starRating = ($rating * 100) / 5;
+                                @endphp
                                 <h3 class="h4 heading"><a
                                         href="{{ route('book.details', $book->id) }}">{{ $book->title }}</a></h3>
                                 <p>by {{ $book->author }}</p>
                                 <div class="star-rating d-inline-flex ml-2" title="">
-                                    <span class="rating-text theme-font theme-yellow">5.0</span>
+                                    <span class="rating-text theme-font theme-yellow">{{ number_format($rating, 1) }}</span>
                                     <div class="star-rating d-inline-flex mx-2" title="">
                                         <div class="back-stars ">
                                             <i class="fa fa-star " aria-hidden="true"></i>
@@ -45,7 +54,7 @@
                                             <i class="fa fa-star" aria-hidden="true"></i>
                                             <i class="fa fa-star" aria-hidden="true"></i>
 
-                                            <div class="front-stars" style="width: 100%">
+                                            <div class="front-stars" style="width: {{ $starRating }}%">
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -54,7 +63,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="theme-font text-muted">(2 Reviews)</span>
+                                    <span class="theme-font text-muted">({{ $book->reviews_count }} Reviews)</span>
                                 </div>
                             </div>
                         </div>

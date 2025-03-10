@@ -7,7 +7,15 @@
             <a href="{{ route('book.home') }}" class="text-decoration-none text-dark ">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp; <strong>Back to books</strong>
             </a>
+            @php
+                if ($book->reviews_count > 0) {
+                    $rating = $book->reviews_sum_rating / $book->reviews_count;
+                } else {
+                    $rating = 0;
+                }
 
+                $starRating = ($rating * 100) / 5;
+            @endphp
             <div class="row mt-4">
                 <div class="col-md-4">
                     <img src="{{ asset('storage/' . $book->photo) }}" alt="" class="card-img-top">
@@ -16,7 +24,7 @@
                     <h3 class="h2 mb-3">{{ $book->title }}</h3>
                     <div class="h4 text-muted">by {{ $book->author }}</div>
                     <div class="star-rating d-inline-flex ml-2" title="">
-                        <span class="rating-text theme-font theme-yellow">5.0</span>
+                        <span class="rating-text theme-font theme-yellow">{{ number_format($rating, 1) }}</span>
                         <div class="star-rating d-inline-flex mx-2" title="">
                             <div class="back-stars ">
                                 <i class="fa fa-star " aria-hidden="true"></i>
@@ -25,7 +33,7 @@
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
 
-                                <div class="front-stars" style="width: 100%">
+                                <div class="front-stars" style="width: {{ $starRating }}%">
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -34,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="theme-font text-muted">(0 Review)</span>
+                        <span class="theme-font text-muted">({{ $book->reviews_count }} Review)</span>
                     </div>
 
                     <div class="content mt-3">
@@ -53,17 +61,30 @@
                         <div class="col-md-12">
                             <h2 class="h3 mb-4">Readers also enjoyed</h2>
                         </div>
+
                         @if ($ReletedBooks->isNotEmpty())
                             @foreach ($ReletedBooks as $relBook)
                                 <div class="col-md-4 col-lg-4 mb-4">
+                                    @php
+                                        if ($relBook->reviews_count > 0) {
+                                            $rating = $relBook->reviews_sum_rating / $relBook->reviews_count;
+                                        } else {
+                                            $rating = 0;
+                                        }
+
+                                        $reletedStarRating = ($rating * 100) / 5;
+                                    @endphp
                                     <div class="card border-0 shadow-lg">
                                         <img src="{{ asset('storage/' . $relBook->photo) }}" alt=""
                                             class="card-img-top">
                                         <div class="card-body">
-                                            <h3 class="h4 heading">Think & Grow Rich</h3>
+                                            <a href="{{ $relBook->id }}">
+                                                <h3 class="h4 heading">Think & Grow Rich</h3>
+                                            </a>
                                             <p>by Napoleon Hill</p>
                                             <div class="star-rating d-inline-flex ml-2" title="">
-                                                <span class="rating-text theme-font theme-yellow">0.0</span>
+                                                <span
+                                                    class="rating-text theme-font theme-yellow">{{ number_format($rating, 1) }}</span>
                                                 <div class="star-rating d-inline-flex mx-2" title="">
                                                     <div class="back-stars ">
                                                         <i class="fa fa-star " aria-hidden="true"></i>
@@ -72,7 +93,7 @@
                                                         <i class="fa fa-star" aria-hidden="true"></i>
                                                         <i class="fa fa-star" aria-hidden="true"></i>
 
-                                                        <div class="front-stars" style="width: 70%">
+                                                        <div class="front-stars" style="width: {{ $reletedStarRating }}%">
                                                             <i class="fa fa-star" aria-hidden="true"></i>
                                                             <i class="fa fa-star" aria-hidden="true"></i>
                                                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -81,7 +102,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span class="theme-font text-muted">(0)</span>
+                                                <span class="theme-font text-muted">({{ $relBook->reviews_count }})</span>
                                             </div>
                                         </div>
                                     </div>

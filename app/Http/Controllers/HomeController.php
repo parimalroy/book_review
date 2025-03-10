@@ -13,11 +13,13 @@ class HomeController extends Controller
 {
     //this method show book list home page
     public function index(Request $request){
-        $books=Book::inrandomorder()->where('status',1);
+        $books=Book::inrandomorder()->withCount('reviews')->withSum('reviews','rating')->where('status',1);
+       
         if(!empty($request->keyword)){
             $books=Book::where('title','like','%'.$request->keyword.'%');
         }
         $books=$books->paginate(8);
+        // dd($books);
         return view('frontend.book.home',['books'=>$books]);
 
     }
@@ -27,9 +29,9 @@ class HomeController extends Controller
     public function details($id){
         $book =Book::with(['reviews.user','reviews'=>function($query){
             $query->where('status',1);
-        }])->findOrFail($id);
+        }])->withCount('reviews')->withSum('reviews','rating')->findOrFail($id);
         // dd($book);
-        $ReletedBooks =Book::inrandomorder()->where('id','!=',$id)->where('status',1)->take(3)->get();
+        $ReletedBooks =Book::inrandomorder()->withCount('reviews')->withSum('reviews','rating')->where('id','!=',$id)->where('status',1)->take(3)->get();
         return view('frontend.book.details',['book'=>$book,'ReletedBooks'=>$ReletedBooks]);
 
     }
