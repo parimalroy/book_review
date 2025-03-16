@@ -21,22 +21,27 @@
         <div class="card-body sidebar">
             <ul class="nav flex-column">
                 @if (Auth::user()->role == 'admin')
-                    <li class="nav-item">
+                    <li
+                        class="nav-item {{ Request::segment(3) == 'index' ? ' fst-italic border-botom border-primary p-2' : '' }}">
                         <a href="{{ route('book.index') }}">Books</a>
                     </li>
-                    <li class="nav-item">
+                    <li
+                        class="nav-item {{ Request::segment(3) == 'review' ? 'fst-italic border-bottom border-primary p-2' : '' }}">
                         <a href="{{ route('review.index') }}">Reviews</a>
                     </li>
-                    <li class="nav-item">
+                    <li
+                        class="nav-item {{ Request::segment(2) == 'profile' ? 'fst-italic border-botom border-primary p-2' : '' }}">
                         <a href="{{ route('profile.index') }}">Profile</a>
                     </li>
                 @endif
-                <li class="nav-item">
+                <li
+                    class="nav-item {{ Request::segment(3) == 'user-review' ? 'fst-italic border-botom border-primary p-2' : '' }}">
                     <a href="{{ route('userReview.index') }}">My Reviews</a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="change-password.html">Change Password</a>
+                <li
+                    class="nav-item {{ Request::segment(2) == 'password' ? 'fst-italic border-botom border-primary p-2' : '' }}">
+                    <a href="{{ route('profile.password') }}">Change Password</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('profile.logout') }}">Logout</a>

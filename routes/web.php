@@ -21,12 +21,14 @@ Route::group(['prefix'=>'account'],function(){
     Route::group(['middleware'=>'guest'],function(){      
         Route::get('register/index', [AccountController::class, 'register_index'])->name('register.index');
         Route::post('register/store', [AccountController::class, 'register_store'])->name('register.store');
-        Route::get('login/index', [AccountController::class, 'login_index'])->name('login.index');
+        Route::get('login', [AccountController::class, 'login_index'])->name('login.index');
         Route::post('login/store',[AccountController::class,'login_store'])->name('login.store');
     });
     Route::group(['middleware'=>'auth'],function(){
         Route::get('profile',[AccountController::class,'profile_index'])->name('profile.index');
         Route::post('profile/updates',[AccountController::class,'profile_update'])->name('profile.updates');
+        Route::get('password',[AccountController::class,'profile_password'])->name('profile.password');
+        Route::post('password',[AccountController::class,'profile_password_update'])->name('profile.password.update');
         Route::get('profile/logout',[AccountController::class,'profile_logout'])->name('profile.logout');
 
         Route::group(['middleware'=>'isAdmin'],function(){

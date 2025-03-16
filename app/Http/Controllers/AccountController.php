@@ -104,6 +104,35 @@ class AccountController extends Controller
     }
 
 
+    //this method show profile password change page
+
+    public function profile_password(){
+    
+        return view('Backend.account.password');
+        
+    }
+
+    //this method update user password
+    public function profile_password_update(Request $request){
+        $request->validate([
+            'old_password'=>'required',
+            'password'=>'required|confirmed|min:5',
+            
+        ]);
+
+        $users =Auth::user();
+        // echo $users->password;
+        // echo $request->old_password;
+
+        if(Hash::check($request->old_password,$users->password)){
+           User::find(Auth::user()->id)->update([
+            'password'=>$request->password
+           ]);
+            return redirect()->route('profile.password')->with('success','Password updated!');
+        }else{
+            return redirect()->route('profile.password')->with('error','Password failed!');
+        }
+    }
    
 
 }
