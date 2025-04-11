@@ -52,7 +52,7 @@ class AccountController extends Controller
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
                 return redirect()->route('profile.index');
             }else{
-                return redirect()->route('login.index')->with('error','credientail not match');
+                return redirect()->route('login.index')->withInput()->with('error','credientail not match');
             }
             
     }
@@ -76,7 +76,7 @@ class AccountController extends Controller
         $request->validate([
             'name'=>'required',
             'email'=>'required',
-            'photo'=>'required|mimes:jpg,png,jpeg|max:3000',
+            'photo'=>'mimes:jpg,png,jpeg|max:3000',
         ]);
 
         
@@ -85,11 +85,12 @@ class AccountController extends Controller
         //     'name'=>$request->name,
         //     'email'=>$request->email,
         // ]);
+        if($request->hasFile('photo')){
         $storeImage=public_path('storage/').$updateUser->photo;
         if(file_exists($storeImage)){
             @unlink($storeImage);
         }
-        if($request->hasFile('photo')){
+        
             $path=$request->photo->store('image','public');
             $updateUser->photo=$path;
             $updateUser->save();

@@ -26,7 +26,7 @@ A simple yet feature-rich web application built using PHP with Laravel for the b
 ## Requirements
 
 #### Before installing the app, make sure you have the following installed on your machine:
-- PHP >= 8.1
+- PHP >= 8.2
 - Composer
 - Laravel 11
 - MySQL
@@ -132,10 +132,5 @@ Users can register, log in, and access their own personalized dashboard, where t
 
 #### Authentication
 -  Laravel Auth Middleware for both users and admin
-
-# Important Notes:
-
-- Default Role: By default, users will be assigned a "User" role unless manually changed to "Admin".
-- Project status : running.
 
 
